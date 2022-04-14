@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration>
+    <property name="Logs" value="C:\Users\LukeNation\Desktop\logs"/>
+
+    <!-- CONSOLE LOG -->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{dd/MM/yyyy HH:mm:ss} %p %C{1.} %m%n </Pattern>
+        </layout>
+    </appender>
+
+
+    <!-- LOG Base -->
+    <appender name="fileLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file> ${Logs}/personal-balance/personal-balance-log.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{dd/MM/yyyy HH:mm:ss} %p %C{1.} %m%n </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>INFO</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${Logs}/personal-balance/historic/personal-balance-log-from-%d{dd/MM/yyyy}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+
+    <!-- ERROR File LOG -->
+    <appender name="errorLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file> ${Logs}/personal-balance/personal-balance-error-log.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{dd/MM/yyyy HH:mm:ss} %p %C{1.} %m%n </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>WARN</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${Logs}/personal-balance/historic/personal-balance-error-log-from-%d{dd/MM/yyyy}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <!-- DEBUG LOG -->
+    <appender name="debugLog" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file> ${Logs}/personal-balance/personal-balance-debug-log.log</file>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>%d{dd/MM/yyyy HH:mm:ss} %p %C{1.} %m%n </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+            <level>TRACE</level>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${Logs}/personal-balance/historic/personal-balance-debug-log-from-%d{dd/MM/yyyy}-%i.log</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>50MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+        </rollingPolicy>
+    </appender>
+
+    <root level="info" additivity="false">
+        <appender-ref ref="console"/>
+        <appender-ref ref="fileLog"/>
+        <appender-ref ref="errorLog"/>
+        <!-- <appender-ref ref="debugLog"/> -->
+    </root>
+</configuration>
